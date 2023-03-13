@@ -4,6 +4,7 @@ import { FormArray, NgForm, Validators } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TostererrorService } from 'src/app/shared/tostererror.service';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     public afAuth: AngularFireAuth,
     private router: Router,
-    private tosterrorService: TostererrorService
+    private tosterrorService: TostererrorService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -37,18 +39,24 @@ export class LoginComponent {
   get errorshow() {
     return this.loginform.controls;
   }
-  loginData(email: string, password: string) {
+  loginData() {
     if (this.loginform.invalid) {
       this.submitted = true;
       return;
     } else {
       this.submitted = false;
-      return this.afAuth
-        .signInWithEmailAndPassword(email, password)
-        .then((result) => {
+     this.authService.loginemailandpassword(this.loginform.value.email,this.loginform.value.password)
+        .then((result:any) => {
           this.tosterrorService.showSuccess(
             'You have been successfully registered!'
           );
+          localStorage.setItem('access-token', result.user._delegate.accessToken);
+          this.router.navigate(['/admin'])
+          if (result.user._delegate.accessToken === 'admin') {
+          //  this.router.navigate(['../admindesk'])
+          } else {
+            // this.router.navigate(['']);
+          }
         })
         .catch((error) => {
           this.tosterrorService.error(

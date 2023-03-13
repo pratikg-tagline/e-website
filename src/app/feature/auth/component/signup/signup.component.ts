@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { getAuth, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import { TostererrorService } from 'src/app/shared/tostererror.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -34,7 +35,7 @@ export class SignupComponent {
   birthdateshare: string = "We'll never share your birthDate with anyone else.";
   phoneno: string = 'Phone No:';
   phonenoshare: string = "We'll never share your phonenumber with anyone else.";
-  userdetails:any
+  userdetails: any;
 
   blockCharacter(e: any) {
     var x = e.which || e.keycode;
@@ -49,7 +50,8 @@ export class SignupComponent {
     public afAuth: AngularFireAuth,
     private router: Router,
     private tosterrorService: TostererrorService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -65,21 +67,21 @@ export class SignupComponent {
   get errorshow() {
     return this.signupform.controls;
   }
-  signupData(email: string, password: string) {
+  signupData() {
     if (this.signupform.invalid) {
       this.submitted = true;
-    
+
       return;
     } else {
       this.submitted = false;
-      this.userdetails =this.db.collection('user-detils');
-      this.userdetails.add({
-        ...this.signupform.value
-      })
-      return this.afAuth
-        .createUserWithEmailAndPassword(email, password)
-        .then((result) => {
-          console.log(result.user);
+      this.authService
+        .signupemailandpassword(
+          this.signupform.value.email,
+          this.signupform.value.password
+        )
+        .then((result: any) => {
+          this.authService.userdetailcollection(this.signupform.value);
+
           this.router.navigate(['login']);
 
           this.tosterrorService.showSuccess(
