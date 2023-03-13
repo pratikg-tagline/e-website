@@ -1,0 +1,129 @@
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image" />
+            </div>
+
+            <div class="col-md-4">
+                <div class="shadow bg-white rounded p-5">
+                    <form [formGroup]="signupform">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{name}} </label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            formControlName="name" aria-describedby="emailHelp"
+                                            placeholder="Enter Name">
+                                        <small id="emailHelp" class="form-text text-muted">{{nameshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['name'].touched && errorshow['name'].invalid) || (errorshow['name'].errors?.['required'] && submitted)
+              ">{{nameerror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{address}} </label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            formControlName="address" aria-describedby="emailHelp"
+                                            placeholder="Enter address">
+                                        <small id="emailHelp" class="form-text text-muted">{{addressshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['address'].touched && errorshow['address'].invalid) || (errorshow['address'].errors?.['required'] && submitted)
+              ">{{addresserror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">{{email}} </label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                            formControlName="email" aria-describedby="emailHelp"
+                                            placeholder="Enter Email">
+                                        <small id="emailHelp" class="form-text text-muted">{{emailshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['email'].touched && errorshow['email'].invalid) || (errorshow['email'].errors?.['required'] && submitted)
+              ">{{emailerror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">{{password}}</label>
+                                        <input type="password" class="form-control" formControlName="password"
+                                            id="exampleInputPassword1" placeholder="Password">
+                                        <small id="emailHelp" class="form-text text-muted">{{passwordshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['password'].touched && errorshow['password'].invalid) || (errorshow['password'].errors?.['required'] && submitted)
+              ">{{passworderror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="birthDate">{{birthdate}}</label>
+                                        <input type="date" class="form-control" formControlName="birthdate"
+                                            id="birthDate" placeholder="BirthDate" [max]="today">
+                                        <small id="emailHelp"
+                                            class="form-text text-muted">{{birthdateshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['birthdate'].touched && errorshow['birthdate'].invalid) || (errorshow['birthdate'].errors?.['required'] && submitted)
+              ">{{birthdateerror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row align-items-center mb-4">
+
+                                    <div class="form-group">
+                                        <label for="birthDate">{{phoneno}}</label>
+                                        <input type="text" class="form-control" formControlName="phone"
+                                            placeholder="Phone Number" (keypress)="blockCharacter($event)"
+                                            maxlength="10" minlength="10">
+                                        <small id="emailHelp" class="form-text text-muted">{{phonenoshare}}</small><br>
+                                        <small class="form-text text-danger" *ngIf="
+                (errorshow['phone'].touched && errorshow['phone'].invalid) || (errorshow['phone'].errors?.['required'] && submitted)
+              ">{{phoneerror}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block"
+                            (click)="signupData(this.signupform.value.email,this.signupform.value.password)">Signup</button>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

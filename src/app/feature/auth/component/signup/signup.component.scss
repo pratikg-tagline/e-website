@@ -1,0 +1,15 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  
+  small.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  :host ::ng-deep{
+    img.img-fluid {
+        margin-top: 150px;
+    }
+    .shadow.bg-white.rounded.p-5 {
+        margin-top: 150px;
+    }
+  }
