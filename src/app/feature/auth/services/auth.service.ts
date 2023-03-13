@@ -20,6 +20,7 @@ export class AuthService {
   const userdetails = this.db.collection('user-detils');
      return userdetails.add({
       ...value,
+      role:'user'
     });
   }
  
