@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <a class="navbar-brand">
+        <img src="../../../assets/Minimalist Simple Initial logo (1).png" routerLink="" height="70" width="100">
+      </a>
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" *ngFor="let header of headers">
+                    <a class="nav-link active" aria-current="page" [routerLink]="header.routerLink">
+                        {{header.label}}
+                    </a>
+                </li>
+
+            </ul>
+            <form class="d-flex" role="search">
+                <button  (click)="logOut()" ><i class="bi bi-power text-danger" ></i></button>  
+             
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<router-outlet></router-outlet>
